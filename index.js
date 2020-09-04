@@ -1,8 +1,15 @@
 "use strict"
 
+// Compatibility issues
 const matchAll = require("string.prototype.matchall");
-const path = require("path");
-const {NGLEGENA, SWARA, PASANGAN, SANDHANGAN, PADA, ANGKA} = require(path.join(__dirname, "charlist.js"));
+const {
+  NGLEGENA,
+  SWARA,
+  PASANGAN,
+  SANDHANGAN,
+  PADA,
+  ANGKA
+} = require("./charlist.js");
 
 const getInitial = (glyph) => {
   if (glyph == null)
@@ -305,7 +312,7 @@ const doTrans = (current, residue, input, isLast = true) => {
   return output();
 };
 
-exports.toCarakan = (value, useDiacritics = false, useSwaraMurda = true) => {
+export const toCarakan = (value, useDiacritics = false, useSwaraMurda = true) => {
   if (typeof value !== "string")
     throw new TypeError("Expected a string");
   
