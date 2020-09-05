@@ -312,15 +312,29 @@ const doTrans = (current, residue, input, isLast = true) => {
   return output();
 };
 
-export const toCarakan = (value, useDiacritics = false, useSwaraMurda = true) => {
+exports.toCarakan = (value, options = {}) => {
   if (typeof value !== "string")
     throw new TypeError("Expected a string");
   
-  let input = useDiacritics
-    ? value.replace(/E(?!`)/g, "X").replace(/E`/g, "E").replace(/e(?!`)/g, "x").replace(/e`/g, "e")
+  options = {
+    diacritics: false,
+    swaraMurda: true,
+    ...options
+  };
+  
+  console.log(options);
+  
+  let input = options.diacritics
+    ? value
+      .replace(/E(?!`)/g, "X")
+      .replace(/e(?!`)/g, "x")
+      .replace(/E`/g, "E")
+      .replace(/e`/g, "e")
+      .replace(/È/g, "E")
+      .replace(/è/g, "e")
     : value;
   
-  if (!useSwaraMurda) input = input.toLowerCase();
+  if (!options.swaraMurda) input = input.toLowerCase();
   
   let result = "";
   const syllableCheck = /([\d]+|[:()'"|<>{}?!])|(dh|ny|th|ng|kh|dz|sy|gh|NY|[hncrkdtswlpjymgbzfvNKTSPGB])?(?![ ](?![aiueoxAIUEOXÉÈéè]))(dh|ny|th|ng|kh|dz|sy|gh|NY|[hncrkdtswlpjymgbzfvNKTSPGB]?)?([aiueoxAIUEOXÉÈéè])(ng|[rh])?(?![aiueoxAIUEOXÉÈéè])|(dh|ny|th|kh|dz|sy|gh|NY|[nckdtswlpjymgbzfvNKTSPGB])?([.,])(?:[ ])?/g;
@@ -358,7 +372,7 @@ export const toCarakan = (value, useDiacritics = false, useSwaraMurda = true) =>
     
     if (current.length > 0)
       // Transliterates the regex-filtered strings
-      result += doTrans(current, residue, input, isLast, useDiacritics);
+      result += doTrans(current, residue, input, isLast);
   }
   
   return result;
