@@ -2,9 +2,7 @@ import { toJavanese } from "../src";
 
 describe("Basic functionality tests", () => {
   it("should convert all 20 Aksara Nglegena", () => {
-    const result = toJavanese(
-      "hanacaraka datasawala padhajayanya magabathanga"
-    );
+    const result = toJavanese("hanacaraka datasawala padhajayanya magabathanga");
     const expected = "ꦲꦤꦕꦫꦏꦢꦠꦱꦮꦭꦥꦝꦗꦪꦚꦩꦒꦧꦛꦔ";
     expect(result).toEqual(expected);
   });
@@ -16,28 +14,20 @@ describe("Basic functionality tests", () => {
   });
 
   it("should convert all Sandhangan Wyanjana", () => {
-    const result = toJavanese(
-      "kyai pangling kalih santri ingkang srxgxp nalika sasi ruwah"
-    );
+    const result = toJavanese("kyai pangling kalih santri ingkang srxgxp nalika sasi ruwah");
     const expected = "ꦏꦾꦲꦶꦥꦁꦭꦶꦁꦏꦭꦶꦃꦱꦤ꧀ꦠꦿꦶꦲꦶꦁꦏꦁꦱꦽꦒꦼꦥ꧀ꦤꦭꦶꦏꦱꦱꦶꦫꦸꦮꦃ";
     expect(result).toEqual(expected);
   });
 
   it("should convert all Pasangan of 20 basic characters", () => {
-    const result = toJavanese(
-      "alhalnalcal ralkal daltalsalwallal paldhaljalyalnyal malgalbalthalnga"
-    );
-    const expected =
-      "ꦲꦭ꧀ꦲꦭ꧀ꦤꦭ꧀ꦕꦭ꧀ꦫꦭ꧀ꦏꦭ꧀ꦢꦭ꧀ꦠꦭ꧀ꦱꦭ꧀ꦮꦭ꧀ꦭꦭ꧀ꦥꦭ꧀ꦝꦭ꧀ꦗꦭꦾꦭ꧀ꦚꦭ꧀ꦩꦭ꧀ꦒꦭ꧀ꦧꦭ꧀ꦛꦭ꧀ꦔ";
+    const result = toJavanese("alhalnalcal ralkal daltalsalwallal paldhaljalyalnyal malgalbalthalnga");
+    const expected = "ꦲꦭ꧀ꦲꦭ꧀ꦤꦭ꧀ꦕꦭ꧀ꦫꦭ꧀ꦏꦭ꧀ꦢꦭ꧀ꦠꦭ꧀ꦱꦭ꧀ꦮꦭ꧀ꦭꦭ꧀ꦥꦭ꧀ꦝꦭ꧀ꦗꦭꦾꦭ꧀ꦚꦭ꧀ꦩꦭ꧀ꦒꦭ꧀ꦧꦭ꧀ꦛꦭ꧀ꦔ";
     expect(result).toEqual(expected);
   });
 
   it("should convert all Pasangan of 20 basic characters with sandhangan swara", () => {
-    const result = toJavanese(
-      "alhilnelcul rolkxl daltilsulwellol pxldholjelyulnyil malgilbulthelngo"
-    );
-    const expected =
-      "ꦲꦭ꧀ꦲꦶꦭ꧀ꦤꦺꦭ꧀ꦕꦸꦭ꧀ꦫꦺꦴꦭ꧀ꦏꦼꦭ꧀ꦢꦭ꧀ꦠꦶꦭ꧀ꦱꦸꦭ꧀ꦮꦺꦭ꧀ꦭꦺꦴꦭ꧀ꦥꦼꦭ꧀ꦝꦺꦴꦭ꧀ꦗꦺꦭꦾꦸꦭ꧀ꦚꦶꦭ꧀ꦩꦭ꧀ꦒꦶꦭ꧀ꦧꦸꦭ꧀ꦛꦺꦭ꧀ꦔꦺꦴ";
+    const result = toJavanese("alhilnelcul rolkxl daltilsulwellol pxldholjelyulnyil malgilbulthelngo");
+    const expected = "ꦲꦭ꧀ꦲꦶꦭ꧀ꦤꦺꦭ꧀ꦕꦸꦭ꧀ꦫꦺꦴꦭ꧀ꦏꦼꦭ꧀ꦢꦭ꧀ꦠꦶꦭ꧀ꦱꦸꦭ꧀ꦮꦺꦭ꧀ꦭꦺꦴꦭ꧀ꦥꦼꦭ꧀ꦝꦺꦴꦭ꧀ꦗꦺꦭꦾꦸꦭ꧀ꦚꦶꦭ꧀ꦩꦭ꧀ꦒꦶꦭ꧀ꦧꦸꦭ꧀ꦛꦺꦭ꧀ꦔꦺꦴ";
     expect(result).toEqual(expected);
   });
 
@@ -74,28 +64,19 @@ describe("Basic functionality tests", () => {
 
 describe("Advanced functionality tests", () => {
   it("should convert Wikipedia-style accents when useAccents == true", () => {
-    const result = toJavanese(
-      "référèndhum menika mutusaken Timor Wétan pisah negari",
-      { useAccents: true }
-    );
+    const result = toJavanese("référèndhum menika mutusaken Timor Wétan pisah negari", { useAccents: true });
     const expected = "ꦫꦺꦥ꦳ꦺꦫꦺꦤ꧀ꦝꦸꦩ꧀ꦩꦼꦤꦶꦏꦩꦸꦠꦸꦱꦏꦼꦤ꧀ꦡꦶꦩꦺꦴꦂꦮꦺꦠꦤ꧀ꦥꦶꦱꦃꦤꦼꦒꦫꦶ";
     expect(result).toEqual(expected);
   });
 
   it("should convert vowels correctly when useSwara == false", () => {
-    const result = toJavanese(
-      "Amerika Italia Uganda Oman Ekuador",
-      { useSwara: false }
-    );
+    const result = toJavanese("Amerika Italia Uganda Oman Ekuador", { useSwara: false });
     const expected = "ꦲꦩꦺꦫꦶꦏꦲꦶꦠꦭꦶꦲꦲꦸꦒꦤ꧀ꦢꦲꦺꦴꦩꦤ꧀ꦲꦺꦏꦸꦲꦢꦺꦴꦂ";
     expect(result).toEqual(expected);
   });
 
   it("should convert consonants correctly when useMurda == false", () => {
-    const result = toJavanese(
-      "Na Ka Ta Sa Pa NYa Ga Ba",
-      { useMurda: false }
-    );
+    const result = toJavanese("Na Ka Ta Sa Pa NYa Ga Ba", { useMurda: false });
     const expected = "ꦤꦏꦠꦱꦥꦚꦒꦧ";
     expect(result).toEqual(expected);
   });
@@ -133,49 +114,37 @@ describe("Advanced functionality tests", () => {
 
 describe("Tests with miscellaneous sentences", () => {
   it("should convert this sentence correctly (1)", () => {
-    const result = toJavanese(
-      "Am,stxrdam not Amstxrdam"
-    );
+    const result = toJavanese("Am,stxrdam not Amstxrdam");
     const expected = "ꦄꦩ꧀‌ꦱ꧀ꦠꦼꦂꦢꦩ꧀ꦤꦺꦴꦠ꧀ꦄꦩ꧀ꦱ꧀ꦠꦼꦂꦢꦩ꧀";
     expect(result).toEqual(expected);
   });
 
   it("should convert this sentence correctly (2)", () => {
-    const result = toJavanese(
-      "jxr basuki mawa beya"
-    );
+    const result = toJavanese("jxr basuki mawa beya");
     const expected = "ꦗꦼꦂꦧꦱꦸꦏꦶꦩꦮꦧꦺꦪ";
     expect(result).toEqual(expected);
   });
 
   it("should convert this sentence correctly (3)", () => {
-    const result = toJavanese(
-      "flamboyan wungu"
-    );
+    const result = toJavanese("flamboyan wungu");
     const expected = "ꦥ꦳꧀ꦭꦩ꧀ꦧꦺꦴꦪꦤ꧀ꦮꦸꦔꦸ";
     expect(result).toEqual(expected);
   });
 
   it("should convert this sentence correctly (4)", () => {
-    const result = toJavanese(
-      "mangan krupuk lan klxpon"
-    );
+    const result = toJavanese("mangan krupuk lan klxpon");
     const expected = "ꦩꦔꦤ꧀ꦏꦿꦸꦥꦸꦏ꧀ꦭꦤ꧀ꦏ꧀ꦭꦼꦥꦺꦴꦤ꧀";
     expect(result).toEqual(expected);
   });
 
   it("should convert this sentence correctly (5)", () => {
-    const result = toJavanese(
-      "cumplung kxcxmplung blumbang gxmblundhung kxmambang"
-    );
+    const result = toJavanese("cumplung kxcxmplung blumbang gxmblundhung kxmambang");
     const expected = "ꦕꦸꦩ꧀ꦥ꧀ꦭꦸꦁꦏꦼꦕꦼꦩ꧀ꦥ꧀ꦭꦸꦁꦧ꧀ꦭꦸꦩ꧀ꦧꦁꦒꦼꦩ꧀ꦧ꧀ꦭꦸꦤ꧀ꦝꦸꦁꦏꦼꦩꦩ꧀ꦧꦁ";
     expect(result).toEqual(expected);
   });
 
   it("should convert this sentence correctly (6)", () => {
-    const result = toJavanese(
-      "nggrombyang ngglembyar"
-    );
+    const result = toJavanese("nggrombyang ngglembyar");
     const expected = "ꦔ꧀ꦒꦿꦺꦴꦩ꧀ꦧꦾꦁꦔ꧀ꦒ꧀ꦭꦺꦩ꧀ꦧꦾꦂ";
     expect(result).toEqual(expected);
   });

@@ -1,7 +1,4 @@
 import { toJavanese } from "./functions/toJavanese";
-import Helper from "./helpers/Helper";
+import CarakanHelper from "./helpers/CarakanHelper";
 
-export {
-    toJavanese,
-    Helper as CarakanHelper
- }
+export { toJavanese, CarakanHelper };

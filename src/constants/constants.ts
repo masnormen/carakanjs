@@ -12,7 +12,7 @@ const r: Record<string, any> = {
   vowels: `[aiueoxAIUEOXÉÊÈéêè]`,
   vowels_swara: `[AIUEO]`,
   anything_except_vowels_swara: `[^AIUEO]`,
-  contains_vowels_optional_consonant: `(dh|ny|th|ng|kh|dz|sy|gh|NY|[hncrkdtswlpjymgbzfvNKTSPGB]?)?(dh|ny|th|ng|kh|dz|sy|gh|NY|[hncrkdtswlpjymgbzfvNKTSPGB]?)?([aiueoxAIUEOXÉÈéè])`,
+  residue_matcher: `(?=[A-Za-zÀ-ÿ])(dh|ny|th|ng|kh|dz|sy|gh|NY|[hncrkdtswlpjymgbzfvNKTSPGB])?(dh|ny|th|ng|kh|dz|sy|gh|NY|[hncrkdtswlpjymgbzfvNKTSPGB])?([aiueoxAIUEOXÉÈéè])?`,
 };
 
 const CarakanConst: Record<string, any> = {
@@ -29,7 +29,7 @@ const CarakanConst: Record<string, any> = {
     é: "e",
   },
 
-  regEx: {
+  regexString: {
     /**
      * Capturer RegEx description (only capture the first found group)
      * -------- MATCH EITHER:

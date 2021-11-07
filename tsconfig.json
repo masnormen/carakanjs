@@ -1,6 +1,9 @@
 {
   "compilerOptions": {
-    "outDir": "./lib",
+    "declaration": true,
+    "declarationDir": "./dist",
+    "module": "es2020",
+    "outDir": "./dist",
     "lib": ["es2020", "es2020.promise", "es2020.string"],
     "target": "es6",
     "skipLibCheck": true,
@@ -8,10 +11,7 @@
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "noImplicitAny": true,
-    "module": "esnext",
-    "moduleResolution": "node",
-    // "noEmit": true,
-    "resolveJsonModule": true,
+    "moduleResolution": "node"
   },
   "include": ["src/**/*.ts"],
   "exclude": ["node_modules"]

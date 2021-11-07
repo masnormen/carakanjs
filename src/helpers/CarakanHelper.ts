@@ -1,12 +1,16 @@
 import { CarakanConst, JavaneseChar } from "../constants/constants";
 
-namespace Helper {
+/**
+ * @class Helper
+ * @classdesc Compiles and build the transliterated syllable into a defined order
+ */
+namespace CarakanHelper {
   /**
    * @description Returns true if the input is a digit number
    * @param str The string to be checked
    */
   export const isDigit = (str: string): boolean => {
-    return RegExp(CarakanConst.regEx.digits, "g").test(str);
+    return RegExp(CarakanConst.regexString.digits, "g").test(str);
   };
 
   /**
@@ -14,7 +18,7 @@ namespace Helper {
    * @param str The string to be checked
    */
   export const isSpace = (str: string): boolean => {
-    return RegExp(CarakanConst.regEx.space, "g").test(str);
+    return RegExp(CarakanConst.regexString.space, "g").test(str);
   };
 
   /**
@@ -96,7 +100,7 @@ namespace Helper {
       case "(":
       case ")":
       case "'":
-      case '"':
+      case "\"":
         return JavaneseChar.PADA["adeg"];
       case "|":
         return JavaneseChar.PADA["adegadeg"];
@@ -138,29 +142,13 @@ namespace Helper {
    * @param onlyLast If true, only the last consonant will be returned
    * @returns {string}
    */
-  export const returnConsonant = (residue: string, onlyLast: boolean = false): string => {
-    /* Return consonant (optional) and vowel if text contains vowel */
-    if (RegExp(CarakanConst.regEx.vowels, "g").test(residue)) {
-      /* Capturing Group:
-       * [1] = consonant (optional)
-       * [2] = consonant (optional)
-       * [3] = vowel
-       */
-      let captureMatches = [...residue.matchAll(RegExp(CarakanConst.regEx.contains_vowels_optional_consonant, "g"))];
-      return captureMatches
-        .map((group) => {
-          if (group[1] != null) {
-            return getInitial(group[1]) + getSonorant(group[2]) + getVowel(group[3]);
-          } else {
-            return getInitial("h") + getVowel(group[2]);
-          }
-        })
-        .join("");
+  export const returnResidue = (residue: string): string => {
+    const groups = [...residue.matchAll(RegExp(CarakanConst.regexString.residue_matcher, "g"))]?.[0];
+    if (groups == null) return "";
+    if (groups[3] == null) {
+      return getInitial(groups[1]) + getFinal("pangkon");
     } else {
-      let matches = [...residue.matchAll(RegExp(CarakanConst.regEx.consonants, "g"))];
-      if (matches.length === 0) return "";
-      if (onlyLast) return matches[matches.length - 1][1];
-      return matches.map((group) => getInitial(group[0]) + getFinal("pangkon")).join("");
+      return getInitial(groups[1]) + getSonorant(groups[2]) + getVowel(groups[3]);
     }
   };
 
@@ -169,7 +157,7 @@ namespace Helper {
    * @param text The text to be normalized
    */
   export const normalizeAccents = (text: string) => {
-    let pattern = new RegExp(Object.keys(CarakanConst.accentsMap).join("|"), "g");
+    const pattern = new RegExp(Object.keys(CarakanConst.accentsMap).join("|"), "g");
     return text.replace(pattern, (matched) => {
       if (matched === "E") matched = "E(?!`)";
       if (matched === "e") matched = "e(?!`)";
@@ -178,4 +166,4 @@ namespace Helper {
   };
 }
 
-export default Helper;
+export default CarakanHelper;

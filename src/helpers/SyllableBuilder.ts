@@ -1,4 +1,4 @@
-import Helper from "./Helper";
+import CarakanHelper from "./CarakanHelper";
 
 /**
  * @class JavaneseBuilder
@@ -35,16 +35,16 @@ export class SyllableBuilder {
     this.postFinal = "";
   }
 
-  build(useResidue: boolean = true): string {
+  build(useResidue = true): string {
     if (useResidue) {
-      this.preMain = Helper.returnConsonant(this.residue);
+      this.preMain = CarakanHelper.returnResidue(this.residue);
     }
     /* Get last residue on the end of input string which isn't picked up yet */
-    let finalIndex = (this.matchGroups.index as number) + this.matchGroups[0].length;
+    const finalIndex = (this.matchGroups.index as number) + this.matchGroups[0].length;
     if (this.isLastOfInput && this.input.length > finalIndex) {
-      let lastResidue = this.input.slice(finalIndex);
-      if (!Helper.isSpace(lastResidue)) {
-        this.postFinal = Helper.getInitial(lastResidue) + Helper.getFinal("pangkon");
+      const lastResidue = this.input.slice(finalIndex);
+      if (!CarakanHelper.isSpace(lastResidue)) {
+        this.postFinal = CarakanHelper.getInitial(lastResidue) + CarakanHelper.getFinal("pangkon");
       }
     }
 
@@ -54,7 +54,7 @@ export class SyllableBuilder {
       this.preMain +
       this.main +
       this.sonorant +
-      this.afterSonorant + // Cakra and Cakra Keret
+      this.afterSonorant + // Cakra and Cakra Keret below Sandhangan
       this.vowel +
       this.final +
       this.postFinal
