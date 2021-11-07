@@ -1,7 +1,7 @@
 # carakan.js
 
 [![npm](https://img.shields.io/npm/v/carakanjs?color=green)](https://www.npmjs.com/package/carakanjs)
-[![size](https://img.shields.io/github/repo-size/masnormen/carakanjs?color=green)](https://github.com/masnormen/carakanjs)
+[![size](https://img.shields.io/github/repo-size/masnormen/carakanjs?color=green)](https://github.com/masnormen/carakanjs) [![Join the chat at https://gitter.im/carakanjs/community](https://badges.gitter.im/carakanjs/community.svg)](https://gitter.im/carakanjs/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 **carakan.js** is a small library for converting Latin script into Javanese script, also known as Aksara Jawa/Carakan.
 
