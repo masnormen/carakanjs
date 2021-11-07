@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "outDir": "./lib",
+    "lib": ["es2020", "es2020.promise", "es2020.string"],
+    "target": "es6",
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "noImplicitAny": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    // "noEmit": true,
+    "resolveJsonModule": true,
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules"]
+}
