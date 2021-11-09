@@ -1,7 +1,10 @@
 {
   "compilerOptions": {
     "declaration": true,
-    "declarationDir": "./dist",
+    "declarationDir": "./dist/types",
+    "allowJs": true,
+    "noEmit": true,
+    "removeComments": true,
     "module": "es2020",
     "outDir": "./dist",
     "lib": ["es2020", "es2020.promise", "es2020.string"],

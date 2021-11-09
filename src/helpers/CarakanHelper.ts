@@ -1,8 +1,8 @@
+import { preferNative as matchAll } from "string-match-all";
 import { CarakanConst, JavaneseChar } from "../constants/constants";
 
 /**
- * @class Helper
- * @classdesc Compiles and build the transliterated syllable into a defined order
+ * @description Provides many helper function to get Javanese unicode characters
  */
 namespace CarakanHelper {
   /**
@@ -10,7 +10,7 @@ namespace CarakanHelper {
    * @param str The string to be checked
    */
   export const isDigit = (str: string): boolean => {
-    return RegExp(CarakanConst.regexString.digits, "g").test(str);
+    return RegExp(CarakanConst.REGEX.DIGITS, "g").test(str);
   };
 
   /**
@@ -18,7 +18,7 @@ namespace CarakanHelper {
    * @param str The string to be checked
    */
   export const isSpace = (str: string): boolean => {
-    return RegExp(CarakanConst.regexString.space, "g").test(str);
+    return RegExp(CarakanConst.REGEX.SPACE, "g").test(str);
   };
 
   /**
@@ -109,9 +109,9 @@ namespace CarakanHelper {
       case ">":
         return JavaneseChar.PADA["piselehwalik"];
       case "{":
-        return JavaneseChar.PADA["rerengankiwa"];
+        return JavaneseChar.PADA["rerenggankiwa"];
       case "}":
-        return JavaneseChar.PADA["rerengantengen"];
+        return JavaneseChar.PADA["rerenggantengen"];
     }
     return char;
   };
@@ -140,10 +140,9 @@ namespace CarakanHelper {
    * @description Returns the consonant from residue
    * @param residue The residue string
    * @param onlyLast If true, only the last consonant will be returned
-   * @returns {string}
    */
   export const returnResidue = (residue: string): string => {
-    const groups = [...residue.matchAll(RegExp(CarakanConst.regexString.residue_matcher, "g"))]?.[0];
+    const groups = [...matchAll(residue, RegExp(CarakanConst.REGEX.CAPTURE_RESIDUE, "g"))]?.[0];
     if (groups == null) return "";
     if (groups[3] == null) {
       return getInitial(groups[1]) + getFinal("pangkon");
@@ -156,12 +155,12 @@ namespace CarakanHelper {
    * @description Remove accents from Latin text and standardize input for Carakan
    * @param text The text to be normalized
    */
-  export const normalizeAccents = (text: string) => {
-    const pattern = new RegExp(Object.keys(CarakanConst.accentsMap).join("|"), "g");
+  export const normalizeAccents = (text: string): string => {
+    const pattern = new RegExp(Object.keys(CarakanConst.ACCENTS_MAP).join("|"), "g");
     return text.replace(pattern, (matched) => {
       if (matched === "E") matched = "E(?!`)";
       if (matched === "e") matched = "e(?!`)";
-      return CarakanConst.accentsMap[matched];
+      return CarakanConst.ACCENTS_MAP[matched];
     });
   };
 }

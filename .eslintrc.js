@@ -13,9 +13,10 @@ module.exports = {
   },
   plugins: ["@typescript-eslint"],
   rules: {
-    semi: ["error", "always"],
-    quotes: ["error", "double", { allowTemplateLiterals: true }],
-    indent: ["error", 2, {SwitchCase: 1}],
+    "semi": ["error", "always"],
+    "quotes": ["error", "double", { allowTemplateLiterals: true }],
+    "quote-props": ["error", "consistent-as-needed"], 
+    "indent": ["error", 2, {SwitchCase: 1}],
     "@typescript-eslint/no-namespace": "off",
   },
 };

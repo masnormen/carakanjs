@@ -64,8 +64,8 @@ const example3 = toCarakan("Banjar", {swaraMurda: false}); // ꦧꦤ꧀ꦗꦂ
 |Pada adeg-adeg    |&#124;                |꧋         |
 |Pada piseleh      |<                  |꧌ ......    |
 |Pada piseleh walik|\>                  |...... ꧍     |
-|Rerengan kiwa     |{                  |꧁ ...     |
-|Rerengan tengen   |}                  |... ꧂      |
+|rerenggan kiwa     |{                  |꧁ ...     |
+|rerenggan tengen   |}                  |... ꧂      |
 
 *) Pada lingsa (comma) will not render if a pangkon is next to it. And pada lungsi (period) will become pada lingsa if a pangkon is next to it
 

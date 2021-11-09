@@ -1,70 +1,54 @@
 /* Regex for various type of valid Javanese glyph */
-const r: Record<string, any> = {
-  consonants: `dh|ny|th|ng|kh|dz|sy|gh|NY|[hncrkdtswlpjymgbzfvNKTSPGB]`,
-  consonants_panyigeg: `ng|[rh]`,
-  consonants_murda: `NY|[NKTSPGB]`,
-  consonants_uppercase_except_murda: `DH|TH|NG|KH|DZ|SY|GH|[^N]Y|[HCRDWLJMZFV]`,
-  consonants_except_panyigeg: `dh|ny|th|kh|dz|sy|gh|NY|[nckdtswlpjymgbzfvNKTSPGB]`,
-  digits: `[\\d]`,
-  digits_or_punc: `[\\d]+|[:()'"|<>{}?!]`,
-  dot_or_comma: `[.,]`,
-  space: `[ ]`,
-  vowels: `[aiueoxAIUEOXÉÊÈéêè]`,
-  vowels_swara: `[AIUEO]`,
-  anything_except_vowels_swara: `[^AIUEO]`,
-  residue_matcher: `(?=[A-Za-zÀ-ÿ])(dh|ny|th|ng|kh|dz|sy|gh|NY|[hncrkdtswlpjymgbzfvNKTSPGB])?(dh|ny|th|ng|kh|dz|sy|gh|NY|[hncrkdtswlpjymgbzfvNKTSPGB])?([aiueoxAIUEOXÉÈéè])?`,
+const IDENTIFIERS: Record<string, string> = {
+  CONSONANTS: `dh|ny|th|ng|kh|dz|sy|gh|NY|[hncrkdtswlpjymgbzfvNKTSPGB]`,
+  CONSONANTS_PANYIGEG: `ng|[rh]`,
+  CONSONANTS_MURDA: `NY|[NKTSPGB]`,
+  CONSONANTS_UPPERCASE_WITHOUT_MURDA: `DH|TH|NG|KH|DZ|SY|GH|[^N]Y|[HCRDWLJMZFV]`,
+  CONSONANTS_WITHOUT_PANYIGEG: `dh|ny|th|kh|dz|sy|gh|NY|[nckdtswlpjymgbzfvNKTSPGB]`,
+  DIGITS: `[\\d]`,
+  DIGITS_PUNC: `[\\d]+|[:()'"|<>{}?!]`,
+  DOT_COMMA: `[.,]`,
+  SPACE: `[ ]`,
+  VOWELS: `[aiueoxAIUEOXÉÊÈéêè]`,
+  VOWELS_SWARA: `[AIUEO]`,
+  EXCEPT_SWARA: `[^AIUEO]`,
+  CAPTURE_RESIDUE: "(?=[A-Za-zÀ-ÿ])(dh|ny|th|ng|kh|dz|sy|gh|NY|[hncrkdtswlpjymgbzfvNKTSPGB])?(dh|ny|th|ng|kh|dz|sy|gh|NY|[hncrkdtswlpjymgbzfvNKTSPGB])?([aiueoxAIUEOXÉÈéè])?",
 };
 
-const CarakanConst: Record<string, any> = {
-  accentsMap: {
+const CarakanConst: Record<string, Record<string, string>> = {
+  ACCENTS_MAP: {
     "E(?!`)": "X",
     "e(?!`)": "x",
     "E`": "E",
     "e`": "e",
-    È: "E",
-    è: "e",
-    Ê: "E",
-    ê: "e",
-    É: "E",
-    é: "e",
+    "È": "E",
+    "è": "e",
+    "Ê": "E",
+    "ê": "e",
+    "É": "E",
+    "é": "e",
   },
 
-  regexString: {
-    /**
-     * Capturer RegEx description (only capture the first found group)
-     * -------- MATCH EITHER:
-     * 1: Digits and Punctuation except '.' and ','
-     * -------- OR
-     * 2: Initial consonant (optional), that's
-     *    Not followed by: a space, that's not followed by a vowel
-     * 3: Sonorant consonant (optional)
-     * 4: Vowel
-     * 5: Final panyigeg-type consonant: r, h, or ng (optional), thats
-     *    Not followed by: a vowel
-     * -------- OR
-     * 6: Muted consonant at the end of sentence (pangkon'd), no panyigeg
-     * 7: Dot or Comma
-     * 8: Space (ignored)
-     */
-    capturerRegEx: [
-      `(${r.digits_or_punc})`,
+  REGEX: {
+    CAPTURE_SYLLABLE: [
+      `(${IDENTIFIERS.DIGITS_PUNC})`,
       `|`,
-      `(${r.consonants})?`,
-      `(?!${r.space}(?!${r.vowels}))`,
-      `(${r.consonants})?`,
-      `(${r.vowels})`,
-      `(${r.consonants_panyigeg})?`,
-      `(?!${r.vowels})`,
+      `(${IDENTIFIERS.CONSONANTS})?`,
+      `(?!${IDENTIFIERS.SPACE}(?!${IDENTIFIERS.VOWELS}))`,
+      `(${IDENTIFIERS.CONSONANTS})?`,
+      `(${IDENTIFIERS.VOWELS})`,
+      `(${IDENTIFIERS.CONSONANTS_PANYIGEG})?`,
+      `(?!${IDENTIFIERS.VOWELS})`,
       `|`,
-      `(${r.consonants_except_panyigeg})?`,
-      `(${r.dot_or_comma})`,
-      `(?:${r.space})?`,
+      `(${IDENTIFIERS.CONSONANTS_WITHOUT_PANYIGEG})?`,
+      `(${IDENTIFIERS.DOT_COMMA})`,
+      `(?:${IDENTIFIERS.SPACE})?`,
     ].join(""),
-    ...r,
+    ...IDENTIFIERS,
   },
 };
 
-const JavaneseChar: Record<string, any> = {
+const JavaneseChar: Record<string, Record<string, string>> = {
   /* Basic Javanese characters */
   NGLEGENA: {
     h: "ꦲ",
@@ -115,7 +99,7 @@ const JavaneseChar: Record<string, any> = {
     E: "ꦌ",
     O: "ꦎ",
 
-    //Pa Cerek, Nga Lelet
+    /* Pa Cerek, Nga Lelet */
     rx: "ꦉ",
     lx: "ꦊ",
   },
@@ -187,22 +171,22 @@ const JavaneseChar: Record<string, any> = {
     adegadeg: "꧋",
     piseleh: "꧌",
     piselehwalik: "꧍",
-    rerengankiwa: "꧁",
-    rerengantengen: "꧂",
+    rerenggankiwa: "꧁",
+    rerenggantengen: "꧂",
   },
 
   /* Javanese digit characters */
   ANGKA: {
-    "1": "꧑",
-    "2": "꧒",
-    "3": "꧓",
-    "4": "꧔",
-    "5": "꧕",
-    "6": "꧖",
-    "7": "꧗",
-    "8": "꧘",
-    "9": "꧙",
-    "0": "꧐",
+    1: "꧑",
+    2: "꧒",
+    3: "꧓",
+    4: "꧔",
+    5: "꧕",
+    6: "꧖",
+    7: "꧗",
+    8: "꧘",
+    9: "꧙",
+    0: "꧐",
   },
 
   MISC: {

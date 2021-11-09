@@ -1,7 +1,4 @@
 /node_modules
-lib/
-dist/
-node_modules/
 /.idea
 /coverage
 ._*

@@ -1,7 +1,6 @@
 import CarakanHelper from "./CarakanHelper";
 
 /**
- * @class JavaneseBuilder
  * @classdesc Compiles and build the transliterated syllable into a defined order
  */
 export class SyllableBuilder {

@@ -4,22 +4,23 @@ import { SyllableBuilder } from "../helpers/SyllableBuilder";
 import { CarakanConst } from "../constants/constants";
 
 /* TYPES */
-interface CarakanConfig {
-  useAccents?: boolean;
-  useSwara?: boolean;
-  useMurda?: boolean;
+type CarakanConfig = {
+  useAccents: boolean;
+  useSwara: boolean;
+  useMurda: boolean;
 }
 
 /**
+ * @function toJavanese
  * @description Transliterate a string in Latin characters into its corresponding form in Javanese script.
- * @param {string} input - The input string in Latin  to be converted.
- * @param {CarakanConfig} [config] - The options for the conversion.
- * @returns {string} The converted string in Javanese script.
+ * @param input The input string in Latin  to be converted.
+ * @param config The options for the conversion.
+ * @returns The converted string in Javanese script.
  * @example
  * toCarakan("karya")
  * // => "ꦏꦂꦪ"
  */
-export const toJavanese = (input: string, config?: CarakanConfig): string => {
+export const toJavanese = (input: string, config?: Partial<CarakanConfig>): string => {
   config = {
     useAccents: false,
     useSwara: true,
@@ -30,7 +31,7 @@ export const toJavanese = (input: string, config?: CarakanConfig): string => {
   /* Normalize whitespaces */
   input = input.trim().replace(/\s+/g, " ");
   /* Lowercase all consonants except Aksara Murda */
-  input = input.replace(RegExp(CarakanConst.regexString.consonants_uppercase_except_murda, "g"), (char) =>
+  input = input.replace(RegExp(CarakanConst.REGEX.CONSONANTS_UPPERCASE_WITHOUT_MURDA, "g"), (char) =>
     char.toLowerCase()
   );
 
@@ -38,17 +39,17 @@ export const toJavanese = (input: string, config?: CarakanConfig): string => {
   if (config.useAccents) input = CarakanHelper.normalizeAccents(input);
   /* Make all vowels lowercase if Aksara Swara is disabled */
   if (!config.useSwara)
-    input = input.replace(RegExp(CarakanConst.regexString.vowels_swara, "g"), (char) => char.toLowerCase());
+    input = input.replace(RegExp(CarakanConst.REGEX.VOWELS_SWARA, "g"), (char) => char.toLowerCase());
   /* Make all Aksara Murda consonants lowercase if Aksara Murda is disabled */
   if (!config.useMurda)
-    input = input.replace(RegExp(CarakanConst.regexString.consonants_murda, "g"), (char) => char.toLowerCase());
+    input = input.replace(RegExp(CarakanConst.REGEX.CONSONANTS_MURDA, "g"), (char) => char.toLowerCase());
 
   /*
    * Here, we break down the input on a per syllable basis using RegEx,
    * iterate and feed it into the syllable converter,
    * and append the result to the output string.
    */
-  const syllables = [...matchAll(input, RegExp(CarakanConst.regexString.capturerRegEx, "g"))];
+  const syllables = [...matchAll(input, RegExp(CarakanConst.REGEX.CAPTURE_SYLLABLE, "g"))];
   let output = "";
   if (syllables.length > 0) {
     for (const [i, current] of syllables.entries()) {
@@ -70,7 +71,6 @@ export const toJavanese = (input: string, config?: CarakanConfig): string => {
 
 /**
  * @description Converts the already broken down syllable into Javanese script
- * @returns {string}
  */
 const getTransliteration = (matchGroups: RegExpMatchArray, residue: string, isLastOfInput: boolean): string => {
   /* Assign each capture groups into variable names */
@@ -122,7 +122,7 @@ const getTransliteration = (matchGroups: RegExpMatchArray, residue: string, isLa
 
   /* Converts syllable containing only vowels, without any initial consonants */
   if (consonant_initial == null) {
-    if (vowel.match(RegExp(CarakanConst.regexString.vowels_swara, "g"))) {
+    if (vowel.match(RegExp(CarakanConst.REGEX.VOWELS_SWARA, "g"))) {
       builder.main = CarakanHelper.getInitial(vowel);
     } else {
       builder.main = CarakanHelper.getInitial("h") + CarakanHelper.getVowel(vowel);
