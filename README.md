@@ -28,7 +28,7 @@ Carakan.js is also fast, needing only less than ***2 milliseconds*** to convert 
   * [:keyboard: Usage](#keyboard-usage)
   * [:asterisk: Table of Punctuations](#asterisk-table-of-punctuations)
   * [:fire: API](#fire-api)
-    + [toCarakan(input, config?)](#tocarakaninput-config)
+    + [toJavanese(input, config?)](#tojavaneseinput-config)
       - [input](#input)
       - [config.useAccents](#configuseaccents)
       - [config.useSwara](#configuseswara)
@@ -167,7 +167,7 @@ toJavanese("kreta krxtxg, lxmah rxgxd");
 
 Carakan.js package exports two things: `toJavanese()` function and `CarakanHelper` namespace which contains various helper.
 
-### toCarakan(input, config?)
+### toJavanese(input, config?)
 
 Returns a string of Javanese script converted from `input`, using the set `config`s.
 
