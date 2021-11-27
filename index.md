@@ -2,15 +2,13 @@
 <img src="https://user-images.githubusercontent.com/3425302/140653792-488f6da0-b934-4f4a-bb2d-84aad6a88e9d.png">
 </p>
 
-# Carakan.js
-
 [![npm](https://img.shields.io/npm/v/carakanjs?color=green)](https://www.npmjs.com/package/carakanjs)
 [![size](https://img.shields.io/github/repo-size/masnormen/carakanjs?color=green)](https://github.com/masnormen/carakanjs)
 [![madein](https://img.shields.io/badge/made%20in-Indonesia-red)](https://github.com/masnormen/carakanjs)
 
 **Carakan.js** is a small library for converting/transliterating Latin script into Javanese script, also known as Aksara Jawa or Carakan.
 
-## :eyes: Why this library?
+## 👀 Why this library?
 
 Yes, I know there are already many Javanese script transliterating library out there, but they are **not accurate**. At least for some words with complicated syllable structure due to the nature of Javanese language. Like "ngglembyar", "nggrambyang".
 
@@ -18,26 +16,7 @@ The complexity of Javanese script writing rules made things difficult. Therefore
 
 Carakan.js is also fast, needing only less than ***2 milliseconds*** to convert a simple sentence. The library is also ***extensively tested*** using various sentences and use cases. You can see the tests [here](https://github.com/masnormen/carakanjs/blob/master/tests/index.spec.ts).
 
-## :open_book: Table of Contents
-
-- [Carakan.js](#carakanjs)
-  * [:eyes: Why this library?](#eyes-why-this-library)
-  * [:open_book: Table of Contents](#open_book-table-of-contents)
-  * [:rocket: Features](#rocket-features)
-  * [:package: Installation](#package-installation)
-  * [:keyboard: Usage](#keyboard-usage)
-  * [:asterisk: Table of Punctuations](#asterisk-table-of-punctuations)
-  * [:fire: API](#fire-api)
-    + [toJavanese(input, config?)](#tojavaneseinput-config)
-      - [input](#input)
-      - [config.useAccents](#configuseaccents)
-      - [config.useSwara](#configuseswara)
-      - [config.useMurda](#configusemurda)
-    + [CarakanHelper](#carakanhelper)
-  * [:toolbox: TODO](#toolbox-todo)
-  * [:books: References](#books-references)
-
-## :rocket: Features
+## 🚀 Features
 
 Currently, Carakan.js can handle:
 
@@ -53,7 +32,7 @@ Currently, Carakan.js can handle:
 - Supports accents (like Wikipedia Basa Jawa)
 - ...and many more (see the code yourself!)
 
-## :package: Installation
+## 📦 Installation
 
 NPM:
 
@@ -67,7 +46,7 @@ Yarn:
 $ yarn add carakanjs
 ```
 
-## :keyboard: Usage
+## ⌨️ Usage
 
 **Example with default options**
 
@@ -147,7 +126,7 @@ toJavanese("kreta krxtxg, lxmah rxgxd");
 // => ꦏꦿꦺꦠꦏꦽꦠꦼꦒ꧀‌ꦊꦩꦃꦉꦒꦼꦢ꧀
 ```
 
-## :asterisk: Table of Punctuations
+## ⁉️ Table of Punctuations
 
 |Name              |Input              |Output     |
 |------------------|-------------------|-----------|
@@ -163,7 +142,7 @@ toJavanese("kreta krxtxg, lxmah rxgxd");
 
 *) Pada Lingsa (comma) will not be rendered if a Pangkon is next to it. Pada Lungsi (period) will be reduced into Pada Lingsa if a Pangkon is next to it. This behavior is adheres to the rules of Javanese writing.
 
-## :fire: API
+## 🔥 API
 
 Carakan.js package exports two things: `toJavanese()` function and `CarakanHelper` namespace which contains various helper.
 
@@ -202,13 +181,13 @@ A boolean indicating whether Carakan.js should convert some uppercase consonants
 
 A namespace which contains various helper for the engine to convert latin letters into Javanese Script.
 
-## :toolbox: TODO
+## 🧰 TODO
 
 - [ ] support transliteration of Javanese script back to Latin
 - [ ] support more Sandhangan: Swara Dirga (for long vowels, typically used to  write Sanskrit)
 - [ ] support more punctuations: Pangrangkep, Pada Luhur, Pada Windu, Purwa Pada, Madya Pada, Wasana Pada
 
-## :books: References
+## 📚 References
 
 - [Panduan Singkat Tipografi Aksara Jawa (Kongres Bahasa Jawa/Bayu, 2019)](https://kongresaksarajawa.id/bayu%20(2019)%20tabel%20dan%20panduan%20singkat%20tipografi%20aksara%20jawa%20(1).pdf)
 - [Pedoman Umum Ejaan Bahasa Jawa Huruf Latin (Kemdikbud, 2006)](http://repositori.kemdikbud.go.id/1672/1/Pedoman%20Umum%20Ejaan%20Bahasa%20Jawa%20Huruf%20Latin%202006.pdf)
