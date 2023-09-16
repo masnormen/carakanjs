@@ -8,7 +8,7 @@
 [![size](https://img.shields.io/github/repo-size/masnormen/carakanjs?color=green)](https://github.com/masnormen/carakanjs)
 [![madein](https://img.shields.io/badge/made%20in-Indonesia-red)](https://github.com/masnormen/carakanjs)
 
-**Carakan.js** is a small library for converting/transliterating Latin script into Javanese script, also known as Aksara Jawa or Carakan.
+**Carakan.js** is a small library for converting/transliterating Latin script into Javanese script, also known as Aksara Jawa or Carakan, and vice versa.
 
 ## :eyes: Why this library?
 
@@ -16,7 +16,7 @@ Yes, I know there are already many Javanese script transliterating library out t
 
 The complexity of Javanese script writing rules made things difficult. Therefore, I want to create a library to create a more accurate transliteration from Latin into Javanese script and vice versa with the linguistic complexity and ease of use in mind, so we can just input the regular Javanese text we usually read and write in Latin text in our everyday conversations.
 
-Carakan.js is also fast, needing only less than ***2 milliseconds*** to convert a simple sentence. The library is also ***extensively tested*** using various sentences and use cases. You can see the tests [here](https://github.com/masnormen/carakanjs/blob/master/tests/index.spec.ts).
+Carakan.js is also fast. The library is also ***extensively tested*** using various sentences and use cases. You can see the tests [here](https://github.com/masnormen/carakanjs/blob/master/tests/index.spec.ts).
 
 ## :open_book: Table of Contents
 
@@ -42,7 +42,7 @@ Carakan.js is also fast, needing only less than ***2 milliseconds*** to convert 
 Currently, Carakan.js can handle:
 
 - Basic Hanacaraka (20 basic characters) and its Pasangan
-- Sandhangan Swara (wulu, taling, pepet, suku, taling tarung) 
+- Sandhangan Swara (wulu, taling, pepet, suku, taling tarung)
 - Sandhangan Wyanjana (cakra, wignyan, etc) and Panjingan
 - Angka
 - Aksara Swara
@@ -147,6 +147,18 @@ toJavanese("kreta krxtxg, lxmah rxgxd");
 // => ꦏꦿꦺꦠꦏꦽꦠꦼꦒ꧀‌ꦊꦩꦃꦉꦒꦼꦢ꧀
 ```
 
+**🆕 Converting Aksara Jawa/Carakan into Latin**
+
+```js
+import { toLatin } from "carakanjs";
+
+let x = toLatin("ꦗꦼꦂ ꦧꦱꦸꦏꦶ ꦩꦮ ꦧꦺꦪ");
+
+console.log(x)
+
+// => jer basuki mawa béya
+```
+
 ## :asterisk: Table of Punctuations
 
 |Name              |Input              |Output     |
@@ -165,46 +177,48 @@ toJavanese("kreta krxtxg, lxmah rxgxd");
 
 ## :fire: API
 
-Carakan.js package exports two things: `toJavanese()` function and `CarakanHelper` namespace which contains various helper.
-
-### toJavanese(input, config?)
+### `toJavanese(input, config?)`
 
 Returns a string of Javanese script converted from `input`, using the set `config`s.
 
-#### input
+#### `input`
 Type: `string`
 
 A string of Latin character which will be transliterated into Javanese script.
 
-#### config.useAccents
+#### `config.useAccents`
 Type: `boolean`, default: `false`
 
-A boolean indicating whether Carakan.js should convert the input string with accents. There are two modes of input: 
+A boolean indicating whether Carakan.js should convert the input string with accents. There are two modes of input:
 
 - **Non-accented mode (default)**
   In this mode, Carakan.js will treat the letter "x" as Pepet (schwa sound) and "e" as Taling (see examples above).
 - **Accented mode**
   The "formally and academically correct" way to write Javanese in Latin. Typically used in Wikipedia basa Jawa texts. In this mode, Carakan.js will treat the letter "e" as Pepet, "é"/"è"/"e\`" as Taling. "x" will still be treated as Pepet (see examples above).
-  
+
 Basically, the transliterator engine can only read string in non-accented mode. When `useAccents` is set to `true`, Carakan.js will convert the accented input into non-accented mode first, so then it can convert them into Javanese script.
 
-#### config.useSwara
+#### `config.useSwara`
 Type: `boolean`, default: `true`
 
 A boolean indicating whether Carakan.js should convert uppercase vowels (A, I, U, E, O) into Aksara Swara. If set to `false`, Carakan.js will render them as regular vowels sound written with the letter "ha".
 
-#### config.useMurda
+#### `config.useMurda`
 Type: `boolean`, default: `true`
 
 A boolean indicating whether Carakan.js should convert some uppercase consonants (N, K, T, S, P, NY, G, B) into Aksara Murda. If set to `false`, Carakan.js will render them with their regular Javanese script character.
 
-### CarakanHelper
+### `toLatin(input)`
 
-A namespace which contains various helper for the engine to convert latin letters into Javanese Script.
+Returns a string of Latin script converted from an `input` of Javanese script.
+
+### `CarakanHelper`
+
+A namespace which contains various helper for the engine to convert Latin letters from and into Javanese Script.
 
 ## :toolbox: TODO
 
-- [ ] support transliteration of Javanese script back to Latin
+- [x] support transliteration of Javanese script back to Latin
 - [ ] support more Sandhangan: Swara Dirga (for long vowels, typically used to  write Sanskrit)
 - [ ] support more punctuations: Pangrangkep, Pada Luhur, Pada Windu, Purwa Pada, Madya Pada, Wasana Pada
 
