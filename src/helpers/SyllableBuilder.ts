@@ -77,4 +77,3 @@ export class SyllableBuilder2 {
     return this.result;
   }
 }
-

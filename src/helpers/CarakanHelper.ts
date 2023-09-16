@@ -5,21 +5,21 @@ import { CarakanConst, CarakanChars, LatinConst } from "../constants/constants";
  * @description Provides many helper function to get Javanese unicode characters
  */
 namespace CarakanHelper {
-    /**
+  /**
    * @description Returns true if the input is a digit number
    * @param str The string to be checked
    */
-    export const isDigit = (str: string): boolean => {
-      return RegExp(CarakanConst.LATIN.DIGITS, "g").test(str);
-    };
-  
-    /**
-     * @description Returns true if the input is a space
-     * @param str The string to be checked
-     */
-    export const isSpace = (str: string): boolean => {
-      return RegExp(CarakanConst.LATIN.SPACE, "g").test(str);
-    };
+  export const isDigit = (str: string): boolean => {
+    return RegExp(CarakanConst.LATIN.DIGITS, "g").test(str);
+  };
+
+  /**
+   * @description Returns true if the input is a space
+   * @param str The string to be checked
+   */
+  export const isSpace = (str: string): boolean => {
+    return RegExp(CarakanConst.LATIN.SPACE, "g").test(str);
+  };
 
   /**
    * @description Returns the corresponding initial consonant character

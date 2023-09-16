@@ -8,7 +8,7 @@ type CarakanConfig = {
   useAccents: boolean;
   useSwara: boolean;
   useMurda: boolean;
-}
+};
 
 /**
  * @function toJavanese
@@ -105,14 +105,17 @@ const getTransliteration = (matchGroups: RegExpMatchArray, residue: string, isLa
   if (dot_or_comma != null) {
     if (dot_or_comma === ",") {
       if (consonant_final != null) {
-        builder.nonLetter = CarakanHelper.getMain(consonant_final) + CarakanHelper.getFinal("pangkon") + CarakanHelper.getMisc("zwnj");
+        builder.nonLetter =
+          CarakanHelper.getMain(consonant_final) + CarakanHelper.getFinal("pangkon") + CarakanHelper.getMisc("zwnj");
       } else {
         builder.nonLetter = CarakanHelper.getPunctuation(",");
       }
     } else {
       if (consonant_final != null) {
         builder.nonLetter =
-          CarakanHelper.getMain(consonant_final) + CarakanHelper.getFinal("pangkon") + CarakanHelper.getPunctuation(",");
+          CarakanHelper.getMain(consonant_final) +
+          CarakanHelper.getFinal("pangkon") +
+          CarakanHelper.getPunctuation(",");
       } else {
         builder.nonLetter = CarakanHelper.getPunctuation(".");
       }

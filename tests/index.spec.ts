@@ -227,9 +227,10 @@ describe("Advanced functionality tests for Carakan -> Latin", () => {
     expect(result).toEqual(expected);
   });
 
-  it("should convert all punctuations", () => { /* Ignore pangkat and "()" */
+  it("should convert all punctuations", () => {
+    /* Ignore pangkat and "()" */
     const result = toLatin("꧁꧌꧋꧋꧈꧉꧊꧊꧍꧂");
-    const expected = '{<||,."">}';
+    const expected = "{<||,.\"\">}";
     expect(result).toEqual(expected);
   });
 
