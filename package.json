@@ -1,6 +1,6 @@
 {
   "name": "carakanjs",
-  "version": "1.1.2",
+  "version": "1.2.0",
   "description": "Carakan.js is a small library for converting/transliterating Latin script into Javanese script, also known as Aksara Jawa or Carakan.",
   "homepage": "https://github.com/masnormen/carakanjs",
   "repository": {
