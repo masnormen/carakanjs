@@ -62,9 +62,9 @@ export class SyllableBuilder {
 }
 
 /**
- * @description A simple class that helps to compile and build the transliterated syllable.
+ * @description A simple class that helps to compile and build the transliterated syllable to Latin.
  */
-export class SyllableBuilder2 {
+export class LatinBuilder {
   result: string;
   constructor() {
     this.result = "";

@@ -1,7 +1,7 @@
 import { preferNative as matchAll } from "string-match-all";
 import { CarakanConst } from "../constants/constants";
 import LatinHelper from "../helpers/LatinHelper";
-import { SyllableBuilder2 } from "../helpers/SyllableBuilder";
+import { LatinBuilder } from "../helpers/SyllableBuilder";
 
 /**
  * @function toLatin
@@ -51,7 +51,7 @@ const getTransliteration = (groups: RegExpMatchArray): string => {
     pada,
   ] = groups.slice(1, 12);
 
-  const builder = new SyllableBuilder2();
+  const builder = new LatinBuilder();
 
   /* Converts syllable containing numbers */
   if (angka != null) {
