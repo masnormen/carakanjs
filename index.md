@@ -33,6 +33,7 @@ Carakan.js is also fast. The library is also ***extensively tested*** using vari
       - [config.useAccents](#configuseaccents)
       - [config.useSwara](#configuseswara)
       - [config.useMurda](#configusemurda)
+    + [toLatin(input)](#tolatininput)
     + [CarakanHelper](#carakanhelper)
   * [:toolbox: TODO](#toolbox-todo)
   * [:books: References](#books-references)
