@@ -1,7 +1,7 @@
 declare namespace CarakanHelper {
     const isDigit: (str: string) => boolean;
     const isSpace: (str: string) => boolean;
-    const getInitial: (char: string) => string;
+    const getMain: (char: string) => string;
     const getSonorant: (char: string) => string;
     const getVowel: (char: string) => string;
     const getFinal: (char: string) => string;
