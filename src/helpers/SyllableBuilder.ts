@@ -43,7 +43,7 @@ export class SyllableBuilder {
     if (this.isLastOfInput && this.input.length > finalIndex) {
       const lastResidue = this.input.slice(finalIndex);
       if (!CarakanHelper.isSpace(lastResidue)) {
-        this.postFinal = CarakanHelper.getInitial(lastResidue) + CarakanHelper.getFinal("pangkon");
+        this.postFinal = CarakanHelper.getMain(lastResidue) + CarakanHelper.getFinal("pangkon");
       }
     }
 
@@ -58,5 +58,22 @@ export class SyllableBuilder {
       this.final +
       this.postFinal
     );
+  }
+}
+
+/**
+ * @description A simple class that helps to compile and build the transliterated syllable to Latin.
+ */
+export class LatinBuilder {
+  result: string;
+  constructor() {
+    this.result = "";
+  }
+  add(input: string): void {
+    this.result += input;
+  }
+  build(input?: string): string {
+    if (input) this.result = input;
+    return this.result;
   }
 }

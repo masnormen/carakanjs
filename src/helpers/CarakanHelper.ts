@@ -1,5 +1,5 @@
 import { preferNative as matchAll } from "string-match-all";
-import { CarakanConst, JavaneseChar } from "../constants/constants";
+import { CarakanConst, CarakanChars, LatinConst } from "../constants/constants";
 
 /**
  * @description Provides many helper function to get Javanese unicode characters
@@ -10,7 +10,7 @@ namespace CarakanHelper {
    * @param str The string to be checked
    */
   export const isDigit = (str: string): boolean => {
-    return RegExp(CarakanConst.REGEX.DIGITS, "g").test(str);
+    return RegExp(CarakanConst.LATIN.DIGITS, "g").test(str);
   };
 
   /**
@@ -18,17 +18,17 @@ namespace CarakanHelper {
    * @param str The string to be checked
    */
   export const isSpace = (str: string): boolean => {
-    return RegExp(CarakanConst.REGEX.SPACE, "g").test(str);
+    return RegExp(CarakanConst.LATIN.SPACE, "g").test(str);
   };
 
   /**
    * @description Returns the corresponding initial consonant character
    * @param char The character to be converted
    */
-  export const getInitial = (char: string): string => {
+  export const getMain = (char: string): string => {
     if (char == null) return "";
-    if (char in JavaneseChar.SWARA) return JavaneseChar.SWARA[char];
-    if (char in JavaneseChar.NGLEGENA) return JavaneseChar.NGLEGENA[char];
+    if (char in CarakanChars.SWARA) return CarakanChars.SWARA[char];
+    if (char in CarakanChars.NGLEGENA) return CarakanChars.NGLEGENA[char];
     return char;
   };
 
@@ -38,10 +38,10 @@ namespace CarakanHelper {
    */
   export const getSonorant = (char: string): string => {
     if (char == null) return "";
-    if (char === "r") return JavaneseChar.SANDHANGAN["cakra"];
-    if (char === "y") return JavaneseChar.SANDHANGAN["pengkal"];
-    if (char === "rx") return JavaneseChar.SANDHANGAN["keret"];
-    if (char in JavaneseChar.PASANGAN) return JavaneseChar.PASANGAN[char];
+    if (char === "r") return CarakanChars.SANDHANGAN["cakra"];
+    if (char === "y") return CarakanChars.SANDHANGAN["pengkal"];
+    if (char === "rx") return CarakanChars.SANDHANGAN["keret"];
+    if (char in CarakanChars.PASANGAN) return CarakanChars.PASANGAN[char];
     return char;
   };
 
@@ -55,18 +55,18 @@ namespace CarakanHelper {
       case "a":
         return "";
       case "i":
-        return JavaneseChar.SANDHANGAN["wulu"];
+        return CarakanChars.SANDHANGAN["wulu"];
       case "u":
-        return JavaneseChar.SANDHANGAN["suku"];
+        return CarakanChars.SANDHANGAN["suku"];
       case "é":
       case "è":
       case "e":
-        return JavaneseChar.SANDHANGAN["taling"];
+        return CarakanChars.SANDHANGAN["taling"];
       case "o":
-        return JavaneseChar.SANDHANGAN["talingTarung"];
+        return CarakanChars.SANDHANGAN["talingTarung"];
       case "ə":
       case "x":
-        return JavaneseChar.SANDHANGAN["pepet"];
+        return CarakanChars.SANDHANGAN["pepet"];
     }
     return char;
   };
@@ -77,11 +77,11 @@ namespace CarakanHelper {
    */
   export const getFinal = (char: string): string => {
     if (char == null) return "";
-    if (char === "r") return JavaneseChar.SANDHANGAN["layar"];
-    if (char === "h") return JavaneseChar.SANDHANGAN["wignyan"];
-    if (char === "ng") return JavaneseChar.SANDHANGAN["cecak"];
-    if (char === "pangkon") return JavaneseChar.SANDHANGAN["pangkon"];
-    return JavaneseChar.PASANGAN[char];
+    if (char === "r") return CarakanChars.SANDHANGAN["layar"];
+    if (char === "h") return CarakanChars.SANDHANGAN["wignyan"];
+    if (char === "ng") return CarakanChars.SANDHANGAN["cecak"];
+    if (char === "pangkon") return CarakanChars.SANDHANGAN["pangkon"];
+    return CarakanChars.PASANGAN[char];
   };
 
   /**
@@ -92,26 +92,26 @@ namespace CarakanHelper {
     if (char == null) return "";
     switch (char) {
       case ",":
-        return JavaneseChar.PADA["lingsa"];
+        return CarakanChars.PADA["lingsa"];
       case ".":
-        return JavaneseChar.PADA["lungsi"];
+        return CarakanChars.PADA["lungsi"];
       case ":":
-        return JavaneseChar.PADA["pangkat"];
+        return CarakanChars.PADA["pangkat"];
       case "(":
       case ")":
       case "'":
       case "\"":
-        return JavaneseChar.PADA["adeg"];
+        return CarakanChars.PADA["adeg"];
       case "|":
-        return JavaneseChar.PADA["adegadeg"];
+        return CarakanChars.PADA["adegadeg"];
       case "<":
-        return JavaneseChar.PADA["piseleh"];
+        return CarakanChars.PADA["piseleh"];
       case ">":
-        return JavaneseChar.PADA["piselehwalik"];
+        return CarakanChars.PADA["piselehwalik"];
       case "{":
-        return JavaneseChar.PADA["rerenggankiwa"];
+        return CarakanChars.PADA["rerenggankiwa"];
       case "}":
-        return JavaneseChar.PADA["rerenggantengen"];
+        return CarakanChars.PADA["rerenggantengen"];
     }
     return char;
   };
@@ -122,7 +122,7 @@ namespace CarakanHelper {
    */
   export const getNumber = (char: string): string => {
     if (char == null) return "";
-    if (char in JavaneseChar.ANGKA) return JavaneseChar.ANGKA[char];
+    if (char in CarakanChars.ANGKA) return CarakanChars.ANGKA[char];
     return "";
   };
 
@@ -132,7 +132,7 @@ namespace CarakanHelper {
    */
   export const getMisc = (char: string): string => {
     if (char == null) return "";
-    if (char in JavaneseChar.MISC) return JavaneseChar.MISC[char];
+    if (char in CarakanChars.MISC) return CarakanChars.MISC[char];
     return "";
   };
 
@@ -142,12 +142,12 @@ namespace CarakanHelper {
    * @param onlyLast If true, only the last consonant will be returned
    */
   export const returnResidue = (residue: string): string => {
-    const groups = [...matchAll(residue, RegExp(CarakanConst.REGEX.CAPTURE_RESIDUE, "g"))]?.[0];
+    const groups = [...matchAll(residue, RegExp(CarakanConst.LATIN.CAPTURE_RESIDUE, "g"))]?.[0];
     if (groups == null) return "";
     if (groups[3] == null) {
-      return getInitial(groups[1]) + getFinal("pangkon");
+      return getMain(groups[1]) + getFinal("pangkon");
     } else {
-      return getInitial(groups[1]) + getSonorant(groups[2]) + getVowel(groups[3]);
+      return getMain(groups[1]) + getSonorant(groups[2]) + getVowel(groups[3]);
     }
   };
 
@@ -156,11 +156,11 @@ namespace CarakanHelper {
    * @param text The text to be normalized
    */
   export const normalizeAccents = (text: string): string => {
-    const pattern = new RegExp(Object.keys(CarakanConst.ACCENTS_MAP).join("|"), "g");
+    const pattern = new RegExp(Object.keys(LatinConst.ACCENTS_MAP).join("|"), "g");
     return text.replace(pattern, (matched) => {
       if (matched === "E") matched = "E(?!`)";
       if (matched === "e") matched = "e(?!`)";
-      return CarakanConst.ACCENTS_MAP[matched];
+      return LatinConst.ACCENTS_MAP[matched];
     });
   };
 }

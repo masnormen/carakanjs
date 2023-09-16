@@ -8,7 +8,7 @@ type CarakanConfig = {
   useAccents: boolean;
   useSwara: boolean;
   useMurda: boolean;
-}
+};
 
 /**
  * @function toJavanese
@@ -31,7 +31,7 @@ export const toJavanese = (input: string, config?: Partial<CarakanConfig>): stri
   /* Normalize whitespaces */
   input = input.trim().replace(/\s+/g, " ");
   /* Lowercase all consonants except Aksara Murda */
-  input = input.replace(RegExp(CarakanConst.REGEX.CONSONANTS_UPPERCASE_WITHOUT_MURDA, "g"), (char) =>
+  input = input.replace(RegExp(CarakanConst.LATIN.CONSONANTS_UPPERCASE_WITHOUT_MURDA, "g"), (char) =>
     char.toLowerCase()
   );
 
@@ -39,17 +39,17 @@ export const toJavanese = (input: string, config?: Partial<CarakanConfig>): stri
   if (config.useAccents) input = CarakanHelper.normalizeAccents(input);
   /* Make all vowels lowercase if Aksara Swara is disabled */
   if (!config.useSwara)
-    input = input.replace(RegExp(CarakanConst.REGEX.VOWELS_SWARA, "g"), (char) => char.toLowerCase());
+    input = input.replace(RegExp(CarakanConst.LATIN.VOWELS_SWARA, "g"), (char) => char.toLowerCase());
   /* Make all Aksara Murda consonants lowercase if Aksara Murda is disabled */
   if (!config.useMurda)
-    input = input.replace(RegExp(CarakanConst.REGEX.CONSONANTS_MURDA, "g"), (char) => char.toLowerCase());
+    input = input.replace(RegExp(CarakanConst.LATIN.CONSONANTS_MURDA, "g"), (char) => char.toLowerCase());
 
   /*
    * Here, we break down the input on a per syllable basis using RegEx,
    * iterate and feed it into the syllable converter,
    * and append the result to the output string.
    */
-  const syllables = [...matchAll(input, RegExp(CarakanConst.REGEX.CAPTURE_SYLLABLE, "g"))];
+  const syllables = [...matchAll(input, RegExp(CarakanConst.REGEX.CAPTURE_LATIN, "g"))];
   let output = "";
   if (syllables.length > 0) {
     for (const [i, current] of syllables.entries()) {
@@ -105,14 +105,17 @@ const getTransliteration = (matchGroups: RegExpMatchArray, residue: string, isLa
   if (dot_or_comma != null) {
     if (dot_or_comma === ",") {
       if (consonant_final != null) {
-        builder.nonLetter = CarakanHelper.getInitial(consonant_final) + CarakanHelper.getFinal("pangkon") + CarakanHelper.getMisc("zwnj");
+        builder.nonLetter =
+          CarakanHelper.getMain(consonant_final) + CarakanHelper.getFinal("pangkon") + CarakanHelper.getMisc("zwnj");
       } else {
         builder.nonLetter = CarakanHelper.getPunctuation(",");
       }
     } else {
       if (consonant_final != null) {
         builder.nonLetter =
-          CarakanHelper.getInitial(consonant_final) + CarakanHelper.getFinal("pangkon") + CarakanHelper.getPunctuation(",");
+          CarakanHelper.getMain(consonant_final) +
+          CarakanHelper.getFinal("pangkon") +
+          CarakanHelper.getPunctuation(",");
       } else {
         builder.nonLetter = CarakanHelper.getPunctuation(".");
       }
@@ -122,10 +125,10 @@ const getTransliteration = (matchGroups: RegExpMatchArray, residue: string, isLa
 
   /* Converts syllable containing only vowels, without any initial consonants */
   if (consonant_initial == null) {
-    if (vowel.match(RegExp(CarakanConst.REGEX.VOWELS_SWARA, "g"))) {
-      builder.main = CarakanHelper.getInitial(vowel);
+    if (vowel.match(RegExp(CarakanConst.LATIN.VOWELS_SWARA, "g"))) {
+      builder.main = CarakanHelper.getMain(vowel);
     } else {
-      builder.main = CarakanHelper.getInitial("h") + CarakanHelper.getVowel(vowel);
+      builder.main = CarakanHelper.getMain("h") + CarakanHelper.getVowel(vowel);
     }
     builder.final = CarakanHelper.getFinal(consonant_panyigeg);
     return builder.build();
@@ -136,7 +139,7 @@ const getTransliteration = (matchGroups: RegExpMatchArray, residue: string, isLa
     let useResidue = true;
     if (residue.length > 0 && !CarakanHelper.isSpace(residue)) {
       /* Place the Cakra/Cakra keret on the bottom of pasangan */
-      builder.main = CarakanHelper.getInitial(residue);
+      builder.main = CarakanHelper.getMain(residue);
       builder.sonorant = CarakanHelper.getSonorant(consonant_initial);
       if (vowel !== "x") {
         builder.afterSonorant = CarakanHelper.getSonorant("r");
@@ -147,7 +150,7 @@ const getTransliteration = (matchGroups: RegExpMatchArray, residue: string, isLa
       useResidue = false;
     } else {
       /* Place the Cakra/Cakra keret on the bottom of main letter */
-      builder.main = CarakanHelper.getInitial(consonant_initial);
+      builder.main = CarakanHelper.getMain(consonant_initial);
       if (vowel === "x") {
         builder.sonorant = CarakanHelper.getSonorant("rx");
       } else {
@@ -161,12 +164,12 @@ const getTransliteration = (matchGroups: RegExpMatchArray, residue: string, isLa
 
   const useGanten = consonant_initial.match(/[rl]/g) && consonant_sonorant == null && vowel === "x";
   if (useGanten) {
-    builder.main = CarakanHelper.getInitial(`${consonant_initial}x`);
+    builder.main = CarakanHelper.getMain(`${consonant_initial}x`);
     builder.final = CarakanHelper.getFinal(consonant_panyigeg);
     return builder.build();
   }
 
-  builder.main = CarakanHelper.getInitial(consonant_initial);
+  builder.main = CarakanHelper.getMain(consonant_initial);
   builder.sonorant = CarakanHelper.getSonorant(consonant_sonorant);
   builder.vowel = CarakanHelper.getVowel(vowel);
   builder.final = CarakanHelper.getFinal(consonant_panyigeg);
